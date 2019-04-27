@@ -25,6 +25,8 @@ export default function App () {
         )} />
     )
 
+
+
     const AuthButton = withRouter(({ history }) => (
         isAuthenticated() === true ? (
             <p>
@@ -43,7 +45,7 @@ export default function App () {
         <Router>
                 <AuthButton/>
             <Switch>
-                <PrivateRoute path='/protected' component={Protected} />
+                <PrivateRoute path='/protected' component={Protected} isAuthenticated={isAuthenticated}/>
                 <Route path="/loginpage" component={LoginPage} />
             </Switch>
         </Router>

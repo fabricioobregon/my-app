@@ -45,8 +45,9 @@ export default function App () {
         <Router>
                 <AuthButton/>
             <Switch>
-                <PrivateRoute path='/protected' component={Protected} isAuthenticated={isAuthenticated}/>
+                <PrivateRoute path='/bookstore' component={Protected} isAuthenticated={isAuthenticated}/>
                 <Route path="/loginpage" component={LoginPage} />
+                <Redirect from="/*" to="/bookstore"   />
             </Switch>
         </Router>
     )

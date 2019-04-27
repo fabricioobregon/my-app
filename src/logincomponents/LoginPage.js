@@ -49,7 +49,7 @@ export default function Login(props) {
                 <h4>username:</h4>
                 <input type="text" name="name" onChange={changeEmail}></input>
                 <h4>password:</h4>
-                <input type="text" name="password" onChange={changePassword}></input>
+                <input type="password" name="password" onChange={changePassword}></input>
                 <div>
                     <button type="submit" >Submit</button>
                 </div>

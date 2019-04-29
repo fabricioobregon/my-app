@@ -3,11 +3,54 @@ import React, { useState, useEffect } from "react";
 export default function FetchGBooks(props){
     const [isbn, setIsbn] = useState("");
     const [fetchJSON, setFetchJSON] = useState(undefined);
+    const [imageUrl, setImageUrl] = useState("");
+    const [title, setTitle] = useState("");
+    const [categorie, setCategorie] = useState("");
+    const [year, setYear] = useState("");
+    const [author, setAuthor] = useState("");
+    const [publisher, setPublisher] = useState("");
+    const [pageCount, setPageCount] = useState("");
+    const [description, setDescription] = useState("");
 
     useEffect(() => {
         // Update the document title using the browser API
         if(isbn === ""){setFetchJSON("");}
     });
+
+    useEffect(() => {
+        // Update the document title using the browser API
+        if(fetchJSON){
+            if(fetchJSON.totalItems > 0){
+                setImageUrl(JSON.stringify(fetchJSON.items[0].volumeInfo.imageLinks.thumbnail));
+                setTitle(JSON.stringify(fetchJSON.items[0].volumeInfo.title));
+                setCategorie(JSON.stringify(fetchJSON.items[0].volumeInfo.categories[0]));
+                setYear(JSON.stringify(fetchJSON.items[0].volumeInfo.publishedDate.substr(0, 4)));
+                setAuthor(JSON.stringify(fetchJSON.items[0].volumeInfo.authors[0]));
+                setPublisher(JSON.stringify(fetchJSON.items[0].volumeInfo.publisher));
+                setPageCount(JSON.stringify(fetchJSON.items[0].volumeInfo.pageCount));
+                setDescription(JSON.stringify(fetchJSON.items[0].volumeInfo.description));
+
+                console.log(isbn);
+                console.log(imageUrl);
+                console.log(title);
+                console.log(categorie);
+                console.log(year);
+                console.log(author);
+                console.log(publisher);
+                console.log(pageCount);
+                console.log(description);
+            }
+        }
+    });
+
+
+
+
+
+
+
+
+
 
     function onSubmit(props) {
         props.preventDefault();
@@ -41,19 +84,14 @@ export default function FetchGBooks(props){
         <div className="autorForm">
             <h1>Find Book by ISBN</h1>
             <form className="pure-form pure-form-aligned" >
-                {/*<h4>username:</h4>*/}
-                {/*<input type="text" onChange={changeEmail}></input>*/}
+                <fieldset>
                 <h4>Isbn:</h4>
                 <input type="text" name="isbn" onChange={changeIsbn}></input>
-                <div>
-                    <button type="submit" className="pure-button pure-button-primary" onClick={onSubmit}>Submit</button>
-                </div>
-            </form>
-            {fetchJSON ?
-                (JSON.stringify(fetchJSON.totalItems) > 0) ? JSON.stringify(fetchJSON.items[0].volumeInfo.title):null
-            :null}
-        </div>
+                    {' '}<button type="submit" className="pure-button pure-button-primary" onClick={onSubmit}>GoogleBooks</button>
+                </fieldset>
 
+            </form>
+        </div>
     );
 
 

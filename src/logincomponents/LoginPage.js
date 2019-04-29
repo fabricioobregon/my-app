@@ -26,9 +26,7 @@ export default function Login(props) {
                 alert("Welcome "+ json.name);
                 props.history.push("/protected")
                  },)
-            .catch(error => {
-            alert(error.message)
-            });
+            .catch(error => {alert(error.message)});
 
     }
 
@@ -43,15 +41,16 @@ export default function Login(props) {
     }
 
     return(
-        <div>
-            <h1>LOGIN PAGE!!!</h1>
-            <form onSubmit={onSubmit}>
+
+        <div className="autorForm">
+            <h1>Login</h1>
+            <form className="pure-form pure-form-aligned" >
                 <h4>username:</h4>
                 <input type="text" name="name" onChange={changeEmail}></input>
                 <h4>password:</h4>
                 <input type="password" name="password" onChange={changePassword}></input>
                 <div>
-                    <button type="submit" >Submit</button>
+                    <button type="submit" className="pure-button pure-button-primary" onClick={onSubmit}>Submit</button>
                 </div>
             </form>
         </div>

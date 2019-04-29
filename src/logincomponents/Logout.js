@@ -1,14 +1,8 @@
-import { Component } from 'react';
-import {browserHistory} from  'react-router-dom';
 
-export default class Logout extends Component {
+export default function Logout (props){
 
-    componentWillMount(){
-        localStorage.removeItem('Authentication');
-        browserHistory.push('/');
-    }
+          props.history.push("/login");
+          localStorage.removeItem('Authentication');
 
-    render(){
-        return null;
-    }
+    return (null);
 }

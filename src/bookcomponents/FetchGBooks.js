@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 
 export default function FetchGBooks(props){
     const [isbn, setIsbn] = useState("");
-    const [fetchJSON, setFetchJSON] = useState(undefined);
-    const [responseJSON, setResponseJSON] = useState(undefined);
+    const [fetchJSON, setFetchJSON] = useState("");
+    const [responseJSON, setResponseJSON] = useState("");
     const [customIsbn, setCustomIsbn] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [title, setTitle] = useState("");
@@ -15,16 +15,12 @@ export default function FetchGBooks(props){
     const [description, setDescription] = useState("");
 
 
-    // useEffect(() => {
-    //     if (fetchJSON === null){
-    //         populateForm();
-    //     }
-    // });
-
-    function callPopulateForm() {populateForm();}
+    useEffect(() => {
+            populateForm();
+    });
 
     function populateForm() {
-            if(isbn.length === 13 && fetchJSON.totalItems > 0){
+            if(fetchJSON.totalItems > 0){
                 setImageUrl(JSON.stringify(fetchJSON.items[0].volumeInfo.imageLinks.thumbnail).replace(/['"]+/g, ''));
                 setTitle(JSON.stringify(fetchJSON.items[0].volumeInfo.title).replace(/['"]+/g, ''));
                 setCategory(JSON.stringify(fetchJSON.items[0].volumeInfo.categories[0]).replace(/['"]+/g, ''));
@@ -35,7 +31,6 @@ export default function FetchGBooks(props){
                 setDescription(JSON.stringify(fetchJSON.items[0].volumeInfo.description).replace(/['"]+/g, ''));
                 setCustomIsbn(JSON.stringify(fetchJSON.items[0].volumeInfo.industryIdentifiers[0].identifier).replace(/['"]+/g, ''));
             }else{
-                setFetchJSON("");
                 setImageUrl("");
                 setTitle("");
                 setCategory("");
@@ -49,11 +44,12 @@ export default function FetchGBooks(props){
 
         }
 
+
     function requestGBooks(props) {
         props.preventDefault();
 
-        if(isbn === "" || isbn.length < 13){
-
+        if(isbn === "" || isbn.length < 13 || isbn.length > 13){
+            console.log("Invalid ISBN size");
         }else{
             fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn, {
                 method: 'GET'
@@ -65,7 +61,7 @@ export default function FetchGBooks(props){
                         throw new Error('ISBN not found');
                     }
                 })
-                .then(json => {setFetchJSON(json);console.log("Here is your fetch " + responseJSON);callPopulateForm();})
+                .then(json => {setFetchJSON(json);})
                 .catch(error => {alert(error.message)});
         }
     }

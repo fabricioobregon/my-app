@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
+import RandomImage from '../extracomponents/RandomImage'
 
-export default function FetchGBooks(props) {
+export default function BookRegister(props) {
     const [isbn, setIsbn] = useState("");
     const [fetchJSON, setFetchJSON] = useState("");
-    const [responseJSON, setResponseJSON] = useState("");
     const [customIsbn, setCustomIsbn] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [title, setTitle] = useState("");
@@ -15,34 +15,38 @@ export default function FetchGBooks(props) {
     const [description, setDescription] = useState("");
 
     useEffect(() => {
-        populateForm();
+
+            if (fetchJSON.totalItems > 0) {
+                setImageUrl(JSON.stringify(fetchJSON.items[0].volumeInfo.imageLinks.thumbnail).replace(/['"]+/g, ''));
+                setTitle(JSON.stringify(fetchJSON.items[0].volumeInfo.title).replace(/['"]+/g, ''));
+                setCategory(JSON.stringify(fetchJSON.items[0].volumeInfo.categories[0]).replace(/['"]+/g, ''));
+                setYear(JSON.stringify(fetchJSON.items[0].volumeInfo.publishedDate.substr(0, 4)).replace(/['"]+/g, ''));
+                setAuthor(JSON.stringify(fetchJSON.items[0].volumeInfo.authors[0]).replace(/['"]+/g, ''));
+                setPublisher(JSON.stringify(fetchJSON.items[0].volumeInfo.publisher).replace(/['"]+/g, ''));
+                setPageCount(JSON.stringify(fetchJSON.items[0].volumeInfo.pageCount).replace(/['"]+/g, ''));
+                setDescription(JSON.stringify(fetchJSON.items[0].volumeInfo.description).replace(/['"]+/g, ''));
+                setCustomIsbn(JSON.stringify(fetchJSON.items[0].volumeInfo.industryIdentifiers[0].identifier).replace(/['"]+/g, ''));
+            } else {
+                clearForm();
+            }
+
     }, [fetchJSON]);
 
-    function populateForm() {
-        if (fetchJSON.totalItems > 0) {
-            setImageUrl(JSON.stringify(fetchJSON.items[0].volumeInfo.imageLinks.thumbnail).replace(/['"]+/g, ''));
-            setTitle(JSON.stringify(fetchJSON.items[0].volumeInfo.title).replace(/['"]+/g, ''));
-            setCategory(JSON.stringify(fetchJSON.items[0].volumeInfo.categories[0]).replace(/['"]+/g, ''));
-            setYear(JSON.stringify(fetchJSON.items[0].volumeInfo.publishedDate.substr(0, 4)).replace(/['"]+/g, ''));
-            setAuthor(JSON.stringify(fetchJSON.items[0].volumeInfo.authors[0]).replace(/['"]+/g, ''));
-            setPublisher(JSON.stringify(fetchJSON.items[0].volumeInfo.publisher).replace(/['"]+/g, ''));
-            setPageCount(JSON.stringify(fetchJSON.items[0].volumeInfo.pageCount).replace(/['"]+/g, ''));
-            setDescription(JSON.stringify(fetchJSON.items[0].volumeInfo.description).replace(/['"]+/g, ''));
-            setCustomIsbn(JSON.stringify(fetchJSON.items[0].volumeInfo.industryIdentifiers[0].identifier).replace(/['"]+/g, ''));
-        } else {
-            setFetchJSON("");
-            setImageUrl("");
-            setTitle("");
-            setCategory("");
-            setYear("");
-            setAuthor("");
-            setPublisher("");
-            setPageCount("");
-            setDescription("");
-            setCustomIsbn("");
-        }
-    }
 
+
+    function clearForm(){
+        setFetchJSON("");
+        setImageUrl("");
+        setTitle("");
+        setCategory("");
+        setYear("");
+        setAuthor("");
+        setPublisher("");
+        setPageCount("");
+        setDescription("");
+        setCustomIsbn("");
+        setIsbn("");
+    }
 
     function requestGBooks(props) {
         props.preventDefault();
@@ -87,7 +91,7 @@ export default function FetchGBooks(props) {
                     authors: ([{name: author}]),
                     customer_id: userId
                 })
-            )
+            );
 
             fetch("http://localhost:9000/book/add", {
                 method: 'POST',
@@ -107,51 +111,27 @@ export default function FetchGBooks(props) {
             })
                 .then(response => {
                     if (response.ok) {
-                        alert("Your book was saved!");
+                        alert("Book saved!");
                         return response.json();
                     } else {
                         throw new Error('Error saving');
                     }
                 })
-                .then(json => {
-                    setResponseJSON(json);
-                })
-                .catch(error => {
-                    alert(error.message)
-                });
+                .then(json => {})
+                .catch(error => {alert(error.message)});
         }
     }
 
-    const changeIsbn = event => {
-        setIsbn(event.target.value);
-    }
-    const changeCustomIsbn = event => {
-        setCustomIsbn(event.target.value);
-    }
-    const changeImageUrl = event => {
-        setImageUrl(event.target.value);
-    }
-    const changeYear = event => {
-        setYear(event.target.value);
-    }
-    const changeTitle = event => {
-        setTitle(event.target.value);
-    }
-    const changeCategory = event => {
-        setCategory(event.target.value);
-    }
-    const changeAuthor = event => {
-        setAuthor(event.target.value);
-    }
-    const changePublisher = event => {
-        setPublisher(event.target.value);
-    }
-    const changePagecount = event => {
-        setPageCount(event.target.value);
-    }
-    const changeDescription = event => {
-        setDescription(event.target.value);
-    }
+    const changeIsbn = event => {setIsbn(event.target.value);}
+    const changeCustomIsbn = event => {setCustomIsbn(event.target.value);}
+    const changeImageUrl = event => {setImageUrl(event.target.value);}
+    const changeYear = event => {setYear(event.target.value);}
+    const changeTitle = event => {setTitle(event.target.value);}
+    const changeCategory = event => {setCategory(event.target.value);}
+    const changeAuthor = event => {setAuthor(event.target.value);}
+    const changePublisher = event => {setPublisher(event.target.value);}
+    const changePagecount = event => {setPageCount(event.target.value);}
+    const changeDescription = event => {setDescription(event.target.value);}
 
     return (
 
@@ -159,12 +139,16 @@ export default function FetchGBooks(props) {
             <div><h3>REGISTER YOUR BOOK</h3></div>
             <form className="pure-form pure-form-stacked">
                 <fieldset>
-                    <div className="pure-u-1 pure-u-md-1-3">
-                        <label htmlFor="isbn">GoogleAPI</label>
-                        <input type="text" id="isbn" className="pure-input-rounded" onChange={changeIsbn}/>
-                        <button type="submit" className="pure-button pure-button-primary"
-                                onClick={requestGBooks}>Search by ISBN
-                        </button>
+                    <div>
+                        <div className="pure-u-1 pure-u-md-1-2">
+                            <br/>
+                            <label htmlFor="isbn">GoogleAPI</label>
+                            <input type="text" id="isbn" className="pure-input-rounded" onChange={changeIsbn} placeholder="13 digits "/>
+                            <button type="submit" className="pure-button pure-button-primary" onClick={requestGBooks}>Search by ISBN</button>
+                        </div>
+                        <div className="pure-u-1 pure-u-md-1-2">
+                            <img src={imageUrl ? imageUrl:RandomImage()} alt="Book Cover" height="240" width="160"/>
+                        </div>
                     </div>
 
                     <div className="pure-g">
@@ -222,8 +206,9 @@ export default function FetchGBooks(props) {
                         </div>
 
                     </div>
-
                     <button type="submit" className="pure-button pure-button-primary" onClick={saveBook}>Save</button>
+                    &nbsp;&nbsp;
+                    <button type="text" className="pure-button pure-button-primary" onClick={clearForm}>Clear</button>
                 </fieldset>
             </form>
 

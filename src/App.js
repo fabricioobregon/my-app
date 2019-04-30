@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
-import {BrowserRouter as Router, Route, Link, Redirect, withRouter, Switch} from 'react-router-dom'
-import {Protected, userid, username} from './Header.js';
+import {BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom'
 import LoginPage from './logincomponents/LoginPage';
 import Logout from './logincomponents/Logout';
-import FetchGBooks from './bookcomponents/FetchGBooks';
+import MyLibrary from './bookcomponents/MyLybrary';
+import BookRegister from './bookcomponents/BookRegister';
 import Example from './Example';
 import RegisterPage from "./logincomponents/RegisterPage";
 
@@ -55,27 +55,25 @@ export default function App() {
                 <div id="menu" className={menu}>
                     <div className="pure-menu">
                         <a className="pure-menu-heading" href="#">ComIT</a>
-
                         <ul className="pure-menu-list">
-                            <li className="pure-menu-item"><Link to="/bookstore"
-                                                                 className="pure-menu-link">Protected</Link></li>
-                            <li className="pure-menu-item"><Link to="/fetchgBooks"
-                                                                 className="pure-menu-link">FetchGBooks</Link></li>
-                            <li className="pure-menu-item"><Link to="/example" className="pure-menu-link">Example</Link>
-                            </li>
-                            <li className="pure-menu-item"><Link to="/logout" className="pure-menu-link">Logout</Link>
-                            </li>
+                            <li className="pure-menu-item"><Link to="/bookstore" className="pure-menu-link">My Lybrary</Link></li>
+                            <li className="pure-menu-item"><Link to="/bookregister" className="pure-menu-link"> Register Book</Link></li>
+                            <li className="pure-menu-item"><Link to="/example" className="pure-menu-link">Example</Link></li>
+                            <li className="pure-menu-item"><Link to="/logout" className="pure-menu-link">Logout</Link></li>
                         </ul>
                     </div>
                 </div>
 
                 <div id="main" className={main}>
                     <div className="content" onClick={contentClick}>
+                        <div className="header">
+                            <h1>ComIT Library System</h1><br/>
+                        </div>
                         <Switch>
-                            <PrivateRoute path='/bookstore' component={Protected} props={username}/>
-                            <PrivateRoute path='/fetchgBooks' component={FetchGBooks} props={username}/>
-                            <PrivateRoute path='/example' component={Example} props={username}/>
-                            <PrivateRoute path='/logout' component={Logout} props={username}/>
+                            <PrivateRoute path='/bookstore' component={MyLibrary}/>
+                            <PrivateRoute path='/bookregister' component={BookRegister}/>
+                            <PrivateRoute path='/example' component={Example}/>
+                            <PrivateRoute path='/logout' component={Logout}/>
                             <Route path="/loginpage" component={LoginPage}/>
                             <Route path="/register" component={RegisterPage}/>
                             <Redirect from="/*" to="/bookstore"/>

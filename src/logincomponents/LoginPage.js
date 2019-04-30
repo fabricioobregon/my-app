@@ -30,21 +30,20 @@ export default function Login(props) {
             });
     }
 
-    const changeEmail = event => {setEmail(event.target.value);console.log("email:" + email)}
-    const changePassword = event => {setPassword(event.target.value);console.log("password:" + password)}
+    const changeEmail = event => {setEmail(event.target.value);}
+    const changePassword = event => {setPassword(event.target.value);}
 
-    function onRegister(){
+    function redirectRegister(){
         props.history.push("/register");
     }
 
     return (
 
         <div className="autorForm">
-            <div><h3>LOGIN</h3></div>
             <form className="pure-form pure-form-aligned">
+                <h3>LOGIN</h3>
                 <fieldset>
                     <div className="pure-g">
-
                         <div className="pure-u-1 pure-u-md-1-3">
                             <label htmlFor="email">E-mail</label>
                             <input id="email" className="pure-u-23-24" type="text" value={email} onChange={changeEmail}/>
@@ -58,8 +57,9 @@ export default function Login(props) {
                     </div>
                     <br/>
                     <div>
-                        <button type="submit" className="pure-button pure-button-primary" onClick={onLogin}>Login</button>&nbsp;&nbsp;
-                        <button type="submit" className="pure-button pure-button-primary" onClick={onRegister}>Register</button>
+                        <button type="submit" className="pure-button pure-button-primary" onClick={onLogin}>Login</button>
+                        &nbsp;&nbsp;
+                        <button type="submit" className="pure-button pure-button-primary" onClick={redirectRegister}>Register</button>
                     </div>
 
 

@@ -7,8 +7,6 @@ export default function Login(props) {
 
     function registerUser(e) {
         e.preventDefault();
-        console.log(email);
-        console.log(password);
         localStorage.removeItem('Authentication');
         fetch("http://localhost:9000/user/register", {
             method: 'POST',
@@ -32,6 +30,10 @@ export default function Login(props) {
             });
     }
 
+    function redirectLogin(){
+        props.history.push("/login");
+    }
+
     const changeName = event => {setName(event.target.value);}
     const changeEmail = event => {setEmail(event.target.value);}
     const changePassword = event => {setPassword(event.target.value);}
@@ -39,7 +41,7 @@ export default function Login(props) {
     return (
 
         <div className="autorForm">
-            <div><h3>LOGIN</h3></div>
+            <h3>Register</h3>
             <form className="pure-form pure-form-stacked">
                 <fieldset>
                     <div className="pure-g">
@@ -62,7 +64,8 @@ export default function Login(props) {
                         </div>
 
                     </div>
-
+                    <button type="submit" className="pure-button pure-button-primary" onClick={redirectLogin}>Return</button>
+                    &nbsp;&nbsp;
                     <button type="submit" className="pure-button pure-button-primary" onClick={registerUser}>Register
                     </button>
                 </fieldset>

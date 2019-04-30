@@ -4,10 +4,10 @@ export function isAuthenticated(){
      return localStorage.getItem('Authentication') !== null;
 }
 
-export function id(){
+export function userId(){
     return token == null ? "":token.id;
 }
 
-export function name(){
+export function userName(){
     return token == null ? "":token.name;
 }

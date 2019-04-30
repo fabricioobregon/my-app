@@ -1,0 +1,20 @@
+.entireCard{
+    alignment: center;
+}
+
+.bookCard{
+    margin: auto;
+    width: 100%;
+    float: top;
+    padding-top: 20px;
+
+}
+
+.bookData{
+    margin: auto;
+    width: 40px;
+    text-align: center;
+    float: bottom;
+    padding-bottom: auto;
+    padding-top: auto;
+}

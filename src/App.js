@@ -67,7 +67,7 @@ export default function App() {
                 <div id="main" className={main}>
                     <div className="content" onClick={contentClick}>
                         <div className="header">
-                            <h1>ComIT Library System</h1><br/>
+                            <h1>ComIT Personal Library</h1>
                         </div>
                         <Switch>
                             <PrivateRoute path='/bookstore' component={MyLibrary}/>

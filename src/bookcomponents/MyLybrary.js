@@ -30,14 +30,16 @@ export default function MyLibrary(props) {
 
 
     return (
-        <div className="pure-g">
-            {fetchJSON ? (fetchJSON.map(book => (
-                    <BookCard key={book.id} book={book}/>
-                ))
-            ) : (
-                <h1>Loading...</h1>
-            )}
-
+        <div>
+            <h3>KEEP TRACK OF YOUR BOOKS</h3><br/>
+            <div className="pure-g">
+                    {fetchJSON ? (fetchJSON.map(book => (
+                            <BookCard key={book.id} book={book}/>
+                        ))
+                    ) : (
+                        <h1>. . .</h1>
+                    )}
+            </div>
         </div>
     );
 

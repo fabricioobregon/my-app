@@ -18,6 +18,7 @@ const title = ((props.book.title).length > 30) ? ((props.book.title).substring(0
     const onChange = event => {setLastPage(event.target.value);}
 
     function updateLastPage(){
+        (parseInt(lastPage) > parseInt(props.book.pageCount)) ? (alert("Error:\nLast page bigger than book pages!")): (
         fetch("http://localhost:9000/book/updatelastpage", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -32,8 +33,8 @@ const title = ((props.book.title).length > 30) ? ((props.book.title).substring(0
                     throw new Error('Error updating');
                 }
             })
-            .catch(error => {alert(error.message)});
-    }
+            .catch(error => {alert(error.message)})
+    )}
 
     function deleteBook() {
         fetch("http://localhost:9000/book/delete", {
@@ -63,7 +64,8 @@ const title = ((props.book.title).length > 30) ? ((props.book.title).substring(0
                 </div>
                 <div className="bookData">
                     <span>{title}</span><br/>
-                    <span>{props.book.authors[0].name}</span><br/>
+                    <span>{props.book.authors[0].name}</span>
+                &nbsp;&nbsp;<span>{props.book.pageCount}pgs.</span><br/>
                     <label>Last Page:</label>
               &nbsp;<input id="lastPage" value={lastPage} onChange={onChange} className="lastPage" type="text"/>
 

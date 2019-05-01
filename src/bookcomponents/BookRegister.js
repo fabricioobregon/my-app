@@ -52,7 +52,7 @@ export default function BookRegister(props) {
         props.preventDefault();
 
         if (isbn === "" || isbn.length < 13 || isbn.length > 13) {
-            console.log("Invalid ISBN size");
+            alert("Google API Error:\nPlease provide a 13 digits ISBN");
         } else {
             fetch("https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn, {method: 'GET'})
                 .then(response => {
@@ -73,7 +73,7 @@ export default function BookRegister(props) {
 
     function saveBook(props) {
         props.preventDefault();
-        if (isbn.length === 13) {
+        if (parseInt(customIsbn.length) === 13) {
 
             const token = JSON.parse(localStorage.getItem('Authentication'));
             const userId = token == null ? "" : token.id;
@@ -119,6 +119,8 @@ export default function BookRegister(props) {
                 })
                 .then(json => {})
                 .catch(error => {alert(error.message)});
+        }else{
+            alert("ISBN Field Error:\nPlease provide a 13 digits ISBN");
         }
     }
 

@@ -4,7 +4,7 @@ import LoginPage from './logincomponents/LoginPage';
 import Logout from './logincomponents/Logout';
 import MyLibrary from './bookcomponents/MyLybrary';
 import BookRegister from './bookcomponents/BookRegister';
-import Example from './Example';
+import Example from './extras/Example';
 import RegisterPage from "./logincomponents/RegisterPage";
 
 export default function App() {
@@ -58,7 +58,7 @@ export default function App() {
                         <ul className="pure-menu-list">
                             <li className="pure-menu-item"><Link to="/bookstore" className="pure-menu-link" replace>My Lybrary</Link></li>
                             <li className="pure-menu-item"><Link to="/bookregister" className="pure-menu-link" replace> Register Book</Link></li>
-                            <li className="pure-menu-item"><Link to="/example" className="pure-menu-link" replace>Example</Link></li>
+                            {/*<li className="pure-menu-item"><Link to="/example" className="pure-menu-link" replace>Example</Link></li>*/}
                             <li className="pure-menu-item"><Link to="/logout" className="pure-menu-link" replace>Logout</Link></li>
                         </ul>
                     </div>
@@ -72,7 +72,7 @@ export default function App() {
                         <Switch>
                             <PrivateRoute path='/bookstore' component={MyLibrary}/>
                             <PrivateRoute path='/bookregister' component={BookRegister}/>
-                            <PrivateRoute path='/example' component={Example}/>
+                            {/*<PrivateRoute path='/example' component={Example}/>*/}
                             <PrivateRoute path='/logout' component={Logout}/>
                             <Route path="/loginpage" component={LoginPage}/>
                             <Route path="/register" component={RegisterPage}/>

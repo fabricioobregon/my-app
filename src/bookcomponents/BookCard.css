@@ -1,20 +1,59 @@
 .entireCard{
+    position: relative;
+    display: inline-block;
     alignment: center;
-}
-
-.bookCard{
-    margin: auto;
-    width: 100%;
-    float: top;
-    padding-top: 20px;
-
+    text-align: center;
+    padding-top: 15px;
+    text-emphasis: #282c34;
+    font-size: 0;
 }
 
 .bookData{
+    display: inline-block;
     margin: auto;
-    width: 40px;
-    text-align: center;
     float: bottom;
-    padding-bottom: auto;
-    padding-top: auto;
+    font-size: small;
+}
+
+.lastPage{
+    width: 25px;
+    height: 12px;
+    border-color: #999999;
+    text-align: center;
+    alignment: center;
+}
+
+.formButtonImg{
+    width: 18px;
+    height: 18px;
+}
+
+.formButtonImg:hover {
+    background-color: #888888;
+}
+
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    /*border-bottom: 1px dotted black;*/
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
 }

@@ -30,8 +30,8 @@ export default function MyLibrary() {
 
     return (
         <div className="pure-g">
-            {fetchJSON ? (fetchJSON.map(({id, imageUrl, lastPage}) => (
-                    <BookCard key={id} imageUrl={imageUrl} lastPage={lastPage}/>
+            {fetchJSON ? (fetchJSON.map(book => (
+                    <BookCard key={book.id} book={book}/>
                 ))
             ) : (
                 <h1>Loading...</h1>

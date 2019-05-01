@@ -3,9 +3,11 @@
     display: inline-block;
     alignment: center;
     text-align: center;
-    padding-top: 15px;
+    padding-top: 25px;
     text-emphasis: #282c34;
     font-size: 0;
+    line-height: 16px;
+    color: #191818;
 }
 
 .bookData{
@@ -19,13 +21,14 @@
     width: 25px;
     height: 12px;
     border-color: #999999;
+    vertical-align:top;
     text-align: center;
-    alignment: center;
 }
 
 .formButtonImg{
     width: 18px;
     height: 18px;
+    vertical-align: bottom;
 }
 
 .formButtonImg:hover {
@@ -43,7 +46,7 @@
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
-    background-color: black;
+    background-color: dodgerblue;
     color: #fff;
     text-align: center;
     border-radius: 6px;

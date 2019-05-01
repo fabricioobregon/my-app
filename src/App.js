@@ -56,10 +56,10 @@ export default function App() {
                     <div className="pure-menu">
                         <a className="pure-menu-heading" href="#">ComIT</a>
                         <ul className="pure-menu-list">
-                            <li className="pure-menu-item"><Link to="/bookstore" className="pure-menu-link">My Lybrary</Link></li>
-                            <li className="pure-menu-item"><Link to="/bookregister" className="pure-menu-link"> Register Book</Link></li>
-                            <li className="pure-menu-item"><Link to="/example" className="pure-menu-link">Example</Link></li>
-                            <li className="pure-menu-item"><Link to="/logout" className="pure-menu-link">Logout</Link></li>
+                            <li className="pure-menu-item"><Link to="/bookstore" className="pure-menu-link" replace>My Lybrary</Link></li>
+                            <li className="pure-menu-item"><Link to="/bookregister" className="pure-menu-link" replace> Register Book</Link></li>
+                            <li className="pure-menu-item"><Link to="/example" className="pure-menu-link" replace>Example</Link></li>
+                            <li className="pure-menu-item"><Link to="/logout" className="pure-menu-link" replace>Logout</Link></li>
                         </ul>
                     </div>
                 </div>

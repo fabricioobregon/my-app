@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 
-
 export default function Login(props) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    function onLogin(e) {
-        e.preventDefault();
+    const onLogin = event => {
+        event.preventDefault();
         localStorage.removeItem('Authentication');
         fetch("http://localhost:9000/user/login", {
             method: 'POST',
@@ -23,7 +22,7 @@ export default function Login(props) {
             .then(json => {
                 localStorage.setItem('Authentication', JSON.stringify(json));
                 alert("Welcome " + json.name);
-                props.history.push("/protected")
+                props.history.push("/bookstore");
             },)
             .catch(error => {
                 alert(error.message)
@@ -59,7 +58,7 @@ export default function Login(props) {
                     <div>
                         <button type="submit" className="pure-button pure-button-primary" onClick={onLogin}>Login</button>
                         &nbsp;&nbsp;
-                        <button type="submit" className="pure-button pure-button-primary" onClick={redirectRegister}>Register</button>
+                        <button type="text" className="pure-button pure-button-primary" onClick={redirectRegister}>Register</button>
                     </div>
 
 

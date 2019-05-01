@@ -7,13 +7,13 @@ import deleteImg from '../css/delete.png';
 
 export default function BookCard(props){
 const [lastPage, setLastPage] = useState(props.book.lastPage ? props.book.lastPage  : "");
-// const [update, setUpdate] = useState(false);
 
-    useEffect(() => {
-    }, []);
+    // useEffect(() => {
+    // }, []);
 
 
-const title = ((props.book.title).length > 30) ? ((props.book.title).substring(0,30) + "...") : (props.book.title).substring(0,30);
+const title = ((props.book.title).length > 30) ? ((props.book.title).substring(0,30) + "...") : (props.book.title);
+const author = ((props.book.authors[0].name).length > 20) ? ((props.book.authors[0].name).substring(0,20) + "...") : (props.book.authors[0].name);
 
     const onChange = event => {setLastPage(event.target.value);}
 
@@ -29,6 +29,7 @@ const title = ((props.book.title).length > 30) ? ((props.book.title).substring(0
             .then(response => {
                 if (response.ok) {
                     alert("Book updated!");
+                    props.updateDelete();
                 } else {
                     throw new Error('Error updating');
                 }
@@ -47,6 +48,7 @@ const title = ((props.book.title).length > 30) ? ((props.book.title).substring(0
             .then(response => {
                 if (response.ok) {
                     alert("Book deleted!");
+                    props.updateDelete();
                 } else {
                     throw new Error('Error deleting');
                 }
@@ -64,7 +66,7 @@ const title = ((props.book.title).length > 30) ? ((props.book.title).substring(0
                 </div>
                 <div className="bookData">
                     <span>{title}</span><br/>
-                    <span>{props.book.authors[0].name}</span>
+                    <span>{author}</span>
                 &nbsp;&nbsp;<span>{props.book.pageCount}pgs.</span><br/>
                     <label>Last Page:</label>
               &nbsp;<input id="lastPage" value={lastPage} onChange={onChange} className="lastPage" type="text"/>

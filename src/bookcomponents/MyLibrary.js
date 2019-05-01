@@ -2,11 +2,22 @@ import React, {useState, useEffect} from "react";
 import BookCard from '../bookcomponents/BookCard';
 import {userId} from '../logincomponents/Authentication';
 
+
 export default function MyLibrary(props) {
     const [fetchJSON, setFetchJSON] = useState(undefined);
+    const [update, setUpdate] = useState(false);
+    const [login, setLogin] = useState(false);
+
     useEffect(() => {
         requestBooks();
-    }, [])
+    }, [update])
+
+    function updateDelete() {
+        setUpdate(!update);
+    }
+
+
+
 
     function requestBooks() {
 
@@ -34,7 +45,7 @@ export default function MyLibrary(props) {
             <h3>KEEP TRACK OF YOUR BOOKS</h3><br/>
             <div className="pure-g">
                     {fetchJSON ? (fetchJSON.map(book => (
-                            <BookCard key={book.id} book={book}/>
+                            <BookCard key={book.id} book={book} updateDelete={updateDelete}/>
                         ))
                     ) : (
                         <h1>. . .</h1>

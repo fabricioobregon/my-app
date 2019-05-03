@@ -1,31 +1,29 @@
 import React, {useState, useEffect} from "react";
 import BookCard from '../bookcomponents/BookCard';
-import {userId} from '../logincomponents/Authentication';
 
 
 export default function MyLibrary(props) {
     const [fetchJSON, setFetchJSON] = useState(undefined);
     const [update, setUpdate] = useState(false);
-    const [login, setLogin] = useState(false);
+    const [login, setLogin] = useState(props.login);
 
     useEffect(() => {
         requestBooks();
-    }, [update])
+    }, [update, props.login])
 
     function updateDelete() {
         setUpdate(!update);
     }
 
 
-
-
     function requestBooks() {
-
+        setLogin(props.login);
+        console.log(login);
         fetch("http://localhost:9000/book/findbyuser", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                id: userId()
+                id: login
             })
         })
             .then(response => {

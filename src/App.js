@@ -5,6 +5,7 @@ import Logout from './logincomponents/Logout';
 import MyLibrary from './bookcomponents/MyLibrary';
 import BookRegister from './bookcomponents/BookRegister';
 import RegisterPage from "./logincomponents/RegisterPage";
+import {userId} from './logincomponents/Authentication'
 
 export default function App() {
     const [layout, setLayout] = useState('');
@@ -35,7 +36,7 @@ export default function App() {
     const PrivateRoute = ({component: Component, ...rest}) => (
         <Route {...rest} render={(props) => (
             isAuthenticated() === true
-                ? <Component {...props} />
+                ? <Component {...props}  login={userId()} />
                 : <Redirect to={{
                     pathname: '/loginpage',
                     state: {from: props.location}
